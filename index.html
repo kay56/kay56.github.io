@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>计算器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #body {
+            background-color: #e9fefa;
+            width: 325px;
+            height: 485px;
+            border: 1px solid #808080;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 5px;
+            margin-bottom: 7px;
+        }
+
+        li {
+            display: inline-block;
+            font-size: 12px;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        input {
+            width: 308px;
+            height: 64px;
+            margin-bottom: 10px;
+            background-color: #e9fefa;
+            border: 1px solid #808080;
+            font-size: 30px;
+            text-align: right;
+        }
+
+        table {
+            margin: 0 auto;
+
+        }
+
+        td {
+            box-shadow: 2px 2px 5px 2px #000000;
+            width: 50px;
+            height: 50px;
+
+        }
+
+        td:hover {
+            background-color: #ff8c00;
+        }
+    </style>
+</head>
+<body>
+<div id="body">
+    <ul>
+        <li>查看(V)</li>
+        <li>编辑(E)</li>
+        <li>帮助(H)</li>
+    </ul>
+    <div>
+        <input id="Show" type="text" placeholder="0" maxlength="17"/>
+    </div>
+    <table border="1px" cellpadding="15px" cellspacing="8px">
+        <tbody>
+        <tr>
+            <td>MC</td>
+            <td>MR</td>
+            <td>MS</td>
+            <td>M+</td>
+            <td>M-</td>
+        </tr>
+        <tr>
+            <td onclick="clearOne()">←</td>
+            <td onclick="clearAll()">CE</td>
+            <td onclick="clearAll()">C</td>
+            <td onclick="addOne()">±</td>
+            <td onclick="sqr()">√</td>
+        </tr>
+        <tr>
+            <td onclick="show(this)">7</td>
+            <td onclick="show(this)">8</td>
+            <td onclick="show(this)">9</td>
+            <td onclick="show(this)">/</td>
+            <td>%</td>
+        </tr>
+        <tr>
+            <td onclick="show(this)">4</td>
+            <td onclick="show(this)">5</td>
+            <td onclick="show(this)">6</td>
+            <td onclick="show(this)">*</td>
+            <td onclick="daoShu()">1/x</td>
+        </tr>
+        <tr>
+            <td onclick="show(this)">1</td>
+            <td onclick="show(this)">2</td>
+            <td onclick="show(this)">3</td>
+            <td onclick="show(this)">-</td>
+            <td rowspan="2" onclick="js()"><b>=</b></td>
+        </tr>
+        <tr>
+            <td colspan="2" onclick="show(this)">0</td>
+            <td onclick="show(this)"><b>.</b></td>
+            <td onclick="show(this)"><b>+</b></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    var str = document.getElementById("Show").value;
+    function show(en) {
+        str += en.innerText;
+        document.getElementById("Show").value = str;
+    }
+    function clearAll() {
+        document.getElementById("Show").value = "";
+        str = "";
+    }
+    function clearOne() {
+        str = str.replace(str.charAt(str.length - 1), "");
+        document.getElementById("Show").value = str;
+        str = "";
+    }
+    function addOne() {
+        if (!isNaN(str.charAt(0))) {
+            str = "-" + str;
+            document.getElementById("Show").value = str;
+        } else {
+            str = str.replace(str.charAt(0), "");
+            document.getElementById("Show").value = str;
+        }
+    }
+    function sqr() {
+        str = Math.sqrt(str);
+        document.getElementById("Show").value = str;
+    }
+    function daoShu() {
+        str = parseFloat(str);
+        str = 1 / str;
+        document.getElementById("Show").value = str;
+    }
+    function js() {
+        str = eval(str);
+        document.getElementById("Show").value = str;
+    }
+</script>
+</body>
+</html>
